@@ -33,10 +33,15 @@ class Zombie:
         self.load_images()
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1,1])
+        self.hit_count = 2
 
 
     def get_bb(self):
         return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+
+    def handle_collision(self, other, group):
+        if group == 'boy:ball':
+            self.hit_count -= 1
 
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
