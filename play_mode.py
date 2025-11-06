@@ -43,9 +43,15 @@ def init():
 
 #    충돌검사가 필요한 페어를 등록
     game_world.addcollide_pairs('boy:ball', boy , None)
+
     for ball in balls:
         game_world.addcollide_pairs('boy:ball',None, ball)
-        game_world.addcollide_pairs('zombie:ball', zombies, None)
+        game_world.addcollide_pairs('zombie:ball', None, ball)
+
+    for zombie in zombies:
+        game_world.addcollide_pairs('zombie:ball', zombie, None)
+
+
 
 def update():
     game_world.update()

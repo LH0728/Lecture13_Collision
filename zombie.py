@@ -43,6 +43,9 @@ class Zombie:
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
             self.hit_count -= 1
+            if not other.stopped:
+                if self.hit_count <= 1:
+                    game_world.remove_object(self)
 
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
@@ -53,8 +56,6 @@ class Zombie:
             self.dir = 1
         self.x = clamp(800, self.x, 1600)
 
-        if self.hit_count == 1:
-            game_world.remove_object(self)
 
 
     def draw(self):
