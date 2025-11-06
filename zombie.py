@@ -34,13 +34,14 @@ class Zombie:
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1,1])
         self.hit_count = 2
+        self.size = 200
 
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - self.size//2, self.y - self.size//2, self.x + self.size//2, self.y + self.size//2
 
-    def handle_collision(self, other, group):
-        if group == 'boy:ball':
+    def handle_collision(self, group, other):
+        if group == 'zombie:ball':
             self.hit_count -= 1
 
     def update(self):
@@ -51,14 +52,16 @@ class Zombie:
         elif self.x < 800:
             self.dir = 1
         self.x = clamp(800, self.x, 1600)
-        pass
+
+        if self.hit_count == 1:
+            game_world.remove_object(self)
 
 
     def draw(self):
         if self.dir < 0:
-            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, self.size, self.size)
         else:
-            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, self.size, self.size)
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):

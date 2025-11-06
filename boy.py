@@ -180,6 +180,7 @@ class Boy:
             game_world.add_object(ball, 1)
             game_world.addcollide_pairs('grass:ball', None , ball) # 생성때 잔디와 공의 충돌검사
             game_world.addcollide_pairs('boy:ball', None,ball)  # 생성때 소년과 공의 충돌검사 페어 추가
+            game_world.addcollide_pairs('zombie:ball', None, ball)
 
 
     def get_bb(self):

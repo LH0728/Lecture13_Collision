@@ -45,6 +45,7 @@ def init():
     game_world.addcollide_pairs('boy:ball', boy , None)
     for ball in balls:
         game_world.addcollide_pairs('boy:ball',None, ball)
+        game_world.addcollide_pairs('zombie:ball', zombies, None)
 
 def update():
     game_world.update()
