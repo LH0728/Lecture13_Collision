@@ -189,5 +189,7 @@ class Boy:
     def handle_collision(self, group, other):
         if group == 'boy:ball': # 충돌처리가 왔는데 이게 boy:ball 이 원인이야
             self.ball_count += 1
+        if group == 'boy:zombie':
+            exit(1)
 
         pass
